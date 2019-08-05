@@ -1,0 +1,47 @@
+#root {
+    width: 80%;
+    margin: auto;
+}
+
+.header {
+    display: flex;
+    flex: 1 1 0;
+    background: #ff742b;
+    padding: 5px;
+}
+
+.logo-wrapper {
+    margin-right: 20px;
+}
+
+.logo-wrapper img {
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+}
+
+.logo-name {
+    color: #fff;
+    display: inline-block;
+    font-size: 18px;
+}
+
+.input-search-box {
+    flex: 2 1 0;
+    margin-right: 20px;
+}
+
+.input-search-box input {
+    width: 100%;
+    padding: 10px;
+}
+
+.powered-by {
+    display: inline-block;
+    flex: 1 1 0;
+}
+
+.powered-by img {
+    width: 60px;
+    height: 15px;
+}
