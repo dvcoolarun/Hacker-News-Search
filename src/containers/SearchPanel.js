@@ -13,7 +13,8 @@ const SearchPanel = ({
     return(
         <div className="search-panel">
           <div>
-            <button onClick={() => showMenuHandler("menu1")}>Search</button>
+            <span>Search</span>
+            <button className="mainButton" onClick={() => showMenuHandler("menu1")}>Stories</button>
             {
                 menu1
                     ? (
@@ -21,9 +22,9 @@ const SearchPanel = ({
                              ref={(element) => {
                                  dropDownHandler(element);
                         }}>
-                          <button>All</button>
-                          <button>Stories</button>
-                          <button>Comments</button>
+                          <button className="dropDownBtn">All</button>
+                          <button className="dropDownBtn">Stories</button>
+                          <button className="dropDownBtn">Comments</button>
                         </div>          
                     )
                     : (
@@ -32,7 +33,8 @@ const SearchPanel = ({
             }
           </div>
           <div>
-            <button onClick={() => showMenuHandler("menu2")}>Popularity</button>
+            <span>by</span>
+            <button className="mainButton" onClick={() => showMenuHandler("menu2")}>Popularity</button>
             {
                 menu2
                     ? (
@@ -40,8 +42,8 @@ const SearchPanel = ({
                              ref={(element) => {
                                  dropDownHandler(element);
                         }}>
-                          <button>Popularity</button>
-                          <button>Date</button>
+                          <button className="dropDownBtn">Popularity</button>
+                          <button className="dropDownBtn">Date</button>
                         </div>          
                     )
                     : (
@@ -50,21 +52,21 @@ const SearchPanel = ({
             }
           </div>
           <div>
-            <button onClick={() => showMenuHandler("menu3")}>All Time</button>
+            <span>for</span>
+            <button className="mainButton" onClick={() => showMenuHandler("menu3")}>All Time</button>
             {
-                menu3
-                
+                menu3 
                     ? (
                         <div className="menu"
                              ref={(element) => {
                                  dropDownHandler(element);
                              }}>
-                          <button>All Time</button>
-                          <button>Last 24h</button>
-                          <button>Past Week</button>
-                          <button>Past Month</button>
-                          <button>Past Year</button>
-                          <button>Custom Range</button>
+                          <button className="dropDownBtn">All Time</button>
+                          <button className="dropDownBtn">Last 24h</button>
+                          <button className="dropDownBtn">Past Week</button>
+                          <button className="dropDownBtn">Past Month</button>
+                          <button className="dropDownBtn">Past Year</button>
+                          <button className="dropDownBtn">Custom Range</button>
                         </div>          
                     )
                     : (

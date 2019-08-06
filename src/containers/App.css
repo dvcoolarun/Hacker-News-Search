@@ -5,30 +5,28 @@
 
 .header {
     display: flex;
-    flex: 1 1 0;
     background: #ff742b;
-    padding: 5px;
+    padding: 10px;
 }
 
 .logo-wrapper {
     margin-right: 20px;
+    flex: 1 1 0;
 }
 
 .logo-wrapper img {
     width: 48px;
-    height: 48px;
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
 .logo-name {
     color: #fff;
     display: inline-block;
-    font-size: 18px;
+    font-size: 1em;
 }
 
 .input-search-box {
     flex: 2 1 0;
-    margin-right: 20px;
 }
 
 .input-search-box input {
@@ -45,3 +43,51 @@
     width: 60px;
     height: 15px;
 }
+
+.menu {
+    width: 100px;
+    border: 1px solid #eee;
+}
+
+.search-panel {
+    display: flex;
+    width: 50%;
+    padding: 10px;
+}
+
+.search-panel span, .mainButton {
+    margin-right: 10px;
+}
+
+.mainButton {
+    border: 1px solid #eee;
+    background: #fff;
+    padding: 5px;
+}
+
+.dropDownBtn {
+    background: #fff;
+    border: 0;
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.post-list-item {
+    background: #f6f6ef;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 13px;
+}
+
+.post-title-panel {
+    margin-bottom: 5px;
+}
+
+.post-list-item span {
+    border-right: 1px solid #eee;
+    margin-right: 5px;
+    padding-right: 5px;
+}
+
+

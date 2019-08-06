@@ -7,11 +7,11 @@ const Header = ({ }) => {
         <div className="header">
           <div className="logo-wrapper">
             <img alt="" src="https://hn.algolia.com/assets/logo-hn-search.png"/>
-            <div className="logo-name">
+            <span className="logo-name">
               Search
               <br/>
               Hacker News
-            </div>
+            </span>
           </div>
           <InputSearch/>
           <div className="powered-by">

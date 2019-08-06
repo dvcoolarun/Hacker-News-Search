@@ -18,10 +18,10 @@ class App extends Component {
         });
     }
 
-    closeMenu = (event, menu) => {
+    closeMenu = (event) => {
         if (!this.dropDownMenu.contains(event.target)) {
-            this.setState({ [menu]: false }, () => {
-                document.removeEventListener('click', this.closeMenu(menu));
+            this.setState({ menu1:false, menu2:false, menu3:false }, () => {
+                document.removeEventListener('click', this.closeMenu);
             });
         }
     }

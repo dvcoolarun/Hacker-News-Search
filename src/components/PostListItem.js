@@ -1,4 +1,5 @@
 import React from 'react';
+import Time from 'Time';
 import PropTypes from 'prop-types';
 
 /* STATELESS POST-LIST-ITEM PAGE USING THE PROPS PASSED */
@@ -6,12 +7,9 @@ const PostListItem = ({ post, index }) => {
     return (
         <div className="post-list-item">
           <div className="post-title-panel">
-            <span className="post-title">
+            <a className="post-title">
               {post.title}
-            </span>
-            <span className="post-url">
-              {post.url}
-            </span>
+            </a>
           </div>
           <div className="post-data-line">
             <span className="post-score">
@@ -20,11 +18,12 @@ const PostListItem = ({ post, index }) => {
             <span className="post-user">
               {post.by}
             </span>
-            <span className="post-time">
-              {post.time}
-            </span>
+            <Time time={post.time}/>
             <span className="post-comments">
               {post.descendants}
+            </span>
+            <span className="post-url">
+              {post.url}
             </span>
           </div>
         </div>
