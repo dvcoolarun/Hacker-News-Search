@@ -27,10 +27,11 @@
 
 .input-search-box {
     flex: 2 1 0;
+    margin-right: 20px;
 }
 
 .input-search-box input {
-    width: 100%;
+    width: 90%;
     padding: 10px;
 }
 
@@ -47,6 +48,7 @@
 .menu {
     width: 100px;
     border: 1px solid #eee;
+    position: absolute;
 }
 
 .search-panel {
@@ -85,9 +87,7 @@
 }
 
 .post-list-item span {
-    border-right: 1px solid #eee;
+    border-right: 3px solid #eee;
     margin-right: 5px;
     padding-right: 5px;
 }
-
-
