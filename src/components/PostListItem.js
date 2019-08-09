@@ -3,30 +3,41 @@ import Time from 'Time';
 import PropTypes from 'prop-types';
 
 /* STATELESS POST-LIST-ITEM PAGE USING THE PROPS PASSED */
+const titleCheck = (title, url, post) => {
+    if (title && url) {
+        return (
+            <div className="post-list-item">
+              <div className="post-title-panel">
+                <a className="post-title" href={post.url}>
+                  {post.title}
+                </a>
+              </div>
+              <div className="post-data-line">
+                <span className="post-score">
+                  {post.points}
+                </span>
+                <span className="post-user">
+                  {post.author}
+                </span>
+                <Time time={post.created_at}/>
+                <span className="post-comments">
+                  {post.num_comments} &nbsp;comments
+                </span>
+                <span className="post-url">
+                  <a href={post.url}>{post.url}</a>
+                </span>
+              </div>
+            </div>
+        );
+    }
+    else {
+        return null;
+    }
+};
+
 const PostListItem = ({ post, index }) => {
     return (
-        <div className="post-list-item">
-          <div className="post-title-panel">
-            <a className="post-title">
-              {post.title}
-            </a>
-          </div>
-          <div className="post-data-line">
-            <span className="post-score">
-              {post.score}
-            </span>
-            <span className="post-user">
-              {post.by}
-            </span>
-            <Time time={post.time}/>
-            <span className="post-comments">
-              {post.descendants}
-            </span>
-            <span className="post-url">
-              {post.url}
-            </span>
-          </div>
-        </div>
+        titleCheck(post.title, post.url, post)
     );
 };
 

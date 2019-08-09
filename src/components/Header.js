@@ -2,7 +2,7 @@ import React from 'react';
 import InputSearch from 'InputSearch';
 
 /* STATELESS HEADER TO SHOWCASE HEADER ITEMS. */
-const Header = ({ }) => {
+const Header = ({ onChange, value }) => {
     return (
         <div className="header">
           <div className="logo-wrapper">
@@ -13,10 +13,10 @@ const Header = ({ }) => {
               Hacker News
             </span>
           </div>
-          <InputSearch/>
-          <div className="powered-by">
-            <img alt="" src="https://d3nb9u6x572n0.cloudfront.net/assets/algolia-logo-white-65086ed3930483340981cc7aaab1be051e38bc091406fd806d0ad05640c1bc28.svg"/>
-          </div>
+          <InputSearch onChange={onChange} value={value}/>
+          {/* <div className="powered-by"> */}
+          {/*   <img alt="" src="https://d3nb9u6x572n0.cloudfront.net/assets/algolia-logo-white-65086ed3930483340981cc7aaab1be051e38bc091406fd806d0ad05640c1bc28.svg"/> */}
+          {/* </div> */}
         </div>
     );
 };

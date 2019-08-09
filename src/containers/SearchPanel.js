@@ -5,18 +5,22 @@ import PropTypes from 'prop-types';
 const SearchPanel = ({
     showMenuHandler,
     dropDownHandler,
-    updateQuery,
+    updateTags,
+    updateNumFilters,
     showCalender,
     menu1,
     menu2,
-    menu3
+    menu3,
+    searchDropDownValue,
+    byDropDownValue,
+    forDropDownValue
 }) => {
     
     return(
         <div className="search-panel">
           <div>
             <span>Search</span>
-            <button className="mainButton" onClick={() => showMenuHandler("menu1")}>Stories</button>
+            <button className="mainButton" onClick={() => showMenuHandler("menu1")}>{searchDropDownValue}</button>
             {
                 menu1
                     ? (
@@ -24,9 +28,9 @@ const SearchPanel = ({
                              ref={(element) => {
                                  dropDownHandler(element);
                         }}>
-                          <button className="dropDownBtn" onClick={() => updateQuery("all")}>All</button>
-                          <button className="dropDownBtn" onClick={() => updateQuery("stories")}>Stories</button>
-                          <button className="dropDownBtn" onClick={() => updateQuery("comments")}>Comments</button>
+                          <button className="dropDownBtn" name="searchDropDownValue" value="All" onClick={() => updateTags("story comment poll job")}>All</button>
+                          <button className="dropDownBtn" name="searchDropDownValue" value="Stories" onClick={() => updateTags("story")}>Stories</button>
+                          <button className="dropDownBtn" name="searchDropDownValue" value="Comments" onClick={() => updateTags("comment")}>Comments</button>
                         </div>          
                     )
                     : (
@@ -36,7 +40,7 @@ const SearchPanel = ({
           </div>
           <div>
             <span>by</span>
-            <button className="mainButton" onClick={() => showMenuHandler("menu2")}>Popularity</button>
+            <button className="mainButton" onClick={() => showMenuHandler("menu2")}>{byDropDownValue}</button>
             {
                 menu2
                     ? (
@@ -44,8 +48,8 @@ const SearchPanel = ({
                              ref={(element) => {
                                  dropDownHandler(element);
                         }}>
-                          <button className="dropDownBtn" onClick={() => updateQuery("popularity")}>Popularity</button>
-                          <button className="dropDownBtn" onClick={() => updateQuery("date")}>Date</button>
+                          <button className="dropDownBtn" name="byDropDownValue" value="Popularity" onClick={() => updateNumFilters("points")}>Popularity</button>
+                          <button className="dropDownBtn" name="byDropDownValue" value="Date" onClick={() => updateNumFilters("date")}>Date</button>
                         </div>          
                     )
                     : (
@@ -55,7 +59,7 @@ const SearchPanel = ({
           </div>
           <div>
             <span>for</span>
-            <button className="mainButton" onClick={() => showMenuHandler("menu3")}>All Time</button>
+            <button className="mainButton" onClick={() => showMenuHandler("menu3")}>{forDropDownValue}</button>
             {
                 menu3 
                     ? (
@@ -63,16 +67,16 @@ const SearchPanel = ({
                              ref={(element) => {
                                  dropDownHandler(element);
                              }}>
-                          <button className="dropDownBtn" onClick={() => updateQuery("all-time")}>All Time</button>
-                          <button className="dropDownBtn" onClick={() => updateQuery("last-24-hours")}>Last 24h</button>
-                          <button className="dropDownBtn" onClick={() => updateQuery("past-week")}>Past Week</button>
-                          <button className="dropDownBtn" onClick={() => updateQuery("past-month")}>Past Month</button>
-                          <button className="dropDownBtn" onClick={() => updateQuery("past-year")}>Past Year</button>
+                          <button className="dropDownBtn" name="fordropdownvalue" value="All-time" onClick={() => updateNumFilters("all-time")}>All-Time</button>
+                          <button className="dropDownBtn" name="fordropdownvalue" value="Last 24h" onClick={() => updateNumFilters("last-24-hours")}>Last 24h</button>
+                          <button className="dropDownBtn" name="fordropdownvalue" value="Past Week" onClick={() => updateNumFilters("past-week")}>Past Week</button>
+                          <button className="dropDownBtn" name="fordropdownvalue" value="Past Month" onClick={() => updateNumFilters("past-month")}>Past Month</button>
+                          <button className="dropDownBtn" name="fordropdownvalue" value="Past Year"  onClick={() => updateNumFilters("past-year")}>Past Year</button>
                           
-
                           {/*
+                             
+                             <button className="dropDownbtn" onClick={() => customDateRange("custom-range")}/>
 
-                             <button className="dropDownbtn" onClick={() => showCalender}/>
                              ** Calender JSX
                           
                           */}
@@ -81,7 +85,7 @@ const SearchPanel = ({
 
                              ** On Submiting Dates
                              ** Get The Values Of Inputs
-                             ** Pass those values to updateQuery handler
+                             ** Pass those values to updateTags handler
                              <button onClick={() => customDateRange(input1, input2)}>Custom Range</button>                           
                            */}
 

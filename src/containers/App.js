@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from 'Header';
 import SearchPanel from 'SearchPanel';
 import PostList from 'PostList';
-import {data} from 'static-data';
+import fetchData, { fetchDataByDate } from '../api';
 import 'App.css';
 
 class App extends Component {
@@ -10,47 +10,58 @@ class App extends Component {
         menu1: false,
         menu2: false,
         menu3: false,
+        clickCount: 0,
         showCalender: false,
-        /* query: "[stories][popularity][all-time]" */
+        query: "",
+        data: [],
+        searchDropDownValue: 'Stories',
+        byDropDownValue: 'Popularity',
+        forDropDownValue: 'All Time',
+        tagFilters: [],
+        numericFilters: []
     }
 
-    updateQuery = (query) => {
-        /* 
-
-          * If first **click** on the button clear the **query** state.
-
-          * Then update the state for specific click **[query].
-
-          * And keep appending to the old [query] state.
-
-          * Based on the query value(** using if-else condition).
-
-          * Calculating What to append to the old query state, **** this.setState({ query: [query] }) ****
-
-          * Calculation of Time(Logic (** using moment.js))
-             ** All-Time (based on popularity)
-             ** Last-24H-hours (calculation based on current time)
-             ** Past-Week (calculate based on time right now, (** past 7 days))
-             ** Past-Month (calculate time, past one month)
-             ** Past-Year (calculate the time, ** past one year from now on)
-
-                     this.setState({ query: [query] }, () => {
-                        // call fetchstories function
-                     });
-
-
-       */
+    componentDidMount() {
+        fetchData(this.state.query)
+            .then(value => this.setState({ data: value.hits }));
     }
 
+    onChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+        
+        fetchData(this.state.query)
+            .then(value => this.setState({ data: value.hits }));
+    };
+
+    updateTags = ({ tag, event }) => {
+        this.setState({
+            tagFilters: [...this.state.tagFilters, tag],
+            [event.target.name]: event.target.value
+        }, () => {
+            console.log(this.state.tagFilters);
+        });
+    };
+    
+    updateNumFilters = ({ filter, event }) => {
+        this.setState({
+            numericFilters: [...this.state.numericFilters, filter],
+            [event.target.name]: event.target.value
+        }, () => {
+            console.log(this.state.numericFilters);
+        });
+    };
+     
     dropDownHandler = (element) => {
         this.dropDownElement = element;
-    }
+    };
 
     showCalenderHandler = () => {
         this.setState({ showCalender: true }, () => {
             document.addEventListener('click', this.closeCalender);
         });
-    }
+    };
 
     closeCalender = (event) => {
         if (!this.dropDownElement.contains(event.target)) {
@@ -58,7 +69,7 @@ class App extends Component {
                 document.removeEventListener('click', this.closeCalender);
             });
         }
-    }
+    };
 
     customDateRange = (fromDate, toDate) => {
 
@@ -67,13 +78,13 @@ class App extends Component {
         ** Updated by other clicks
         */
         /* fetchdata */
-    }
+    };
     
     showMenuHandler = (menu) => {
         this.setState({ [menu]: true }, () => {
             document.addEventListener('click', this.closeMenu);
         });
-    }
+    };
 
     closeMenu = (event) => {
         if (!this.dropDownElement.contains(event.target)) {
@@ -81,23 +92,28 @@ class App extends Component {
                 document.removeEventListener('click', this.closeMenu);
             });
         }
-    }
+    };
         
     render() {
         return (
             <div className="App">
-              <Header/>
+              <Header onChange={this.onChange} value={this.state.query}/>
               <SearchPanel showMenuHandler={this.showMenuHandler}
                            dropDownHandler={this.dropDownHandler}
-                           updateQuery={this.updateQuery}
+                           updateTags={this.updateTags}
+                           updateNumFilters={this.updateNumFilters}
                            showCalender={this.showCalender}
                            menu1={this.state.menu1}
                            menu2={this.state.menu2}
-                           menu3={this.state.menu3}/>
-              <PostList posts_data={data}/>
+                           menu3={this.state.menu3}
+                           searchDropDownValue={this.state.searchDropDownValue}
+                           byDropDownValue={this.state.byDropDownValue}
+                           forDropDownValue={this.state.forDropDownValue}
+              />
+              <PostList posts_data={this.state.data}/>
             </div>
         );
     }
-}
+};
 
 export default App;
