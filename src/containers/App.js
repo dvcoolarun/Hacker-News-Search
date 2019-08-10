@@ -14,11 +14,12 @@ class App extends Component {
         showCalender: false,
         query: "",
         data: [],
-        searchDropDownValue: 'Stories',
-        byDropDownValue: 'Popularity',
-        forDropDownValue: 'All Time',
-        tagFilters: [],
-        numericFilters: []
+        searchDropDownValue: "Stories",
+        byDropDownValue: "Popularity",
+        forDropDownValue: "All Time",
+        tagFilter: "",
+        sortFilter: "",
+        numericFilter: ""
     }
 
     componentDidMount() {
@@ -29,30 +30,40 @@ class App extends Component {
     onChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
+        }, () => {
+            fetchData(this.state.query)
+                .then(value => this.setState({ data: value.hits }));
         });
-        
-        fetchData(this.state.query)
-            .then(value => this.setState({ data: value.hits }));
     };
 
-    updateTags = ({ tag, event }) => {
+    updateTagFilter = (event, tag) => {
         this.setState({
-            tagFilters: [...this.state.tagFilters, tag],
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.value,
+            tagFilter: tag
         }, () => {
-            console.log(this.state.tagFilters);
+            console.log(this.state.tagFilter);
         });
     };
     
-    updateNumFilters = ({ filter, event }) => {
+    updateNumFilter = (event, filter) => {
         this.setState({
-            numericFilters: [...this.state.numericFilters, filter],
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.value,
+            numericFilter: filter
         }, () => {
-            console.log(this.state.numericFilters);
+            console.log(this.state.numericFilter);
         });
     };
-     
+
+    updateSortFilter = (event, sort) => {
+        this.setState({
+            [event.target.name]: event.target.value,
+            sortFilter: sort
+        }, () => {
+            console.log(this.state.sortFilter);
+        });
+
+    }
+
     dropDownHandler = (element) => {
         this.dropDownElement = element;
     };
@@ -100,8 +111,9 @@ class App extends Component {
               <Header onChange={this.onChange} value={this.state.query}/>
               <SearchPanel showMenuHandler={this.showMenuHandler}
                            dropDownHandler={this.dropDownHandler}
-                           updateTags={this.updateTags}
-                           updateNumFilters={this.updateNumFilters}
+                           updateTagFilter={this.updateTagFilter}
+                           updateNumFilter={this.updateNumFilter}
+                           updateSortFilter={this.updateSortFilter}
                            showCalender={this.showCalender}
                            menu1={this.state.menu1}
                            menu2={this.state.menu2}
