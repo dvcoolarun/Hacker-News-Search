@@ -3,6 +3,12 @@ import Time from 'Time';
 import PropTypes from 'prop-types';
 
 /* STATELESS POST-LIST-ITEM PAGE USING THE PROPS PASSED */
+const createMarkup = (storyComment) => {
+    return (
+        {__html: storyComment}
+    );
+};
+
 const titleCheck = (title, url, post) => {
     if (title && url) {
         return (
@@ -31,7 +37,29 @@ const titleCheck = (title, url, post) => {
         );
     }
     else {
-        return null;
+        return(
+            <div className="post-list-item">
+              <div className="post-title-panel">
+                <a className="post-title">
+                  {post.story_title}
+                </a>
+              </div>
+              <div className="post-data-line">
+                <span className="post-score">
+                  {post.points}
+                </span>
+                <span className="post-user">
+                  {post.author}
+                </span>
+                <Time time={post.created_at}/>
+                <span className="post-number-comments">
+                  {post.num_comments} &nbsp;comments
+                </span>
+              </div>
+              <div dangerouslySetInnerHTML={createMarkup(post.comment_text)}>
+              </div>
+            </div>
+        );
     }
 };
 

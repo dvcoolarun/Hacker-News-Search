@@ -36,14 +36,14 @@ const SearchPanel = ({
                                   name="searchDropDownValue"
                                   value="All"
                                   onClick={(event) =>
-                                           updateTagFilter(event, "story comment poll job")}>
+                                           updateTagFilter(event, "(story,comment,poll)")}>
                             All
                           </button>
                           <button className="dropDownBtn"
                                   name="searchDropDownValue"
                                   value="Stories"
                                   onClick={(event) =>
-                                           updateTagFilter(event, "Stories")}>
+                                           updateTagFilter(event, "story")}>
                             Stories
                           </button>
                           <button className="dropDownBtn"

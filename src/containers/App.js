@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Header from 'Header';
+import moment from 'moment';
 import SearchPanel from 'SearchPanel';
 import PostList from 'PostList';
-import fetchData, { fetchDataByDate } from '../api';
+import fetchData from '../api';
 import 'App.css';
 
 class App extends Component {
@@ -10,29 +11,36 @@ class App extends Component {
         menu1: false,
         menu2: false,
         menu3: false,
-        clickCount: 0,
         showCalender: false,
         query: "",
         data: [],
         searchDropDownValue: "Stories",
         byDropDownValue: "Popularity",
         forDropDownValue: "All Time",
-        tagFilter: "",
-        sortFilter: "",
-        numericFilter: ""
+        tagFilter: "(story,comment,poll)",
+        sortFilter: "popularity",
+        numericFilter: "created_at_i>1171843200"
     }
 
     componentDidMount() {
-        fetchData(this.state.query)
-            .then(value => this.setState({ data: value.hits }));
+        fetchData(this.state.query,
+                  this.state.tagFilter,
+                  this.state.sortFilter,
+                  this.state.numericFilter
+                 ).then(value =>
+                        this.setState({ data: value.hits }));
     }
 
     onChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
         }, () => {
-            fetchData(this.state.query)
-                .then(value => this.setState({ data: value.hits }));
+            fetchData(this.state.query,
+                      this.state.tagFilter,
+                      this.state.sortFilter,
+                      this.state.numericFilter
+                     ).then(value =>
+                            this.setState({ data: value.hits }));
         });
     };
 
@@ -41,28 +49,52 @@ class App extends Component {
             [event.target.name]: event.target.value,
             tagFilter: tag
         }, () => {
-            console.log(this.state.tagFilter);
+            fetchData(this.state.query,
+                      this.state.tagFilter,
+                      this.state.sortFilter,
+                      this.state.numericFilter
+                     ).then(value =>
+                            this.setState({ data: value.hits }));
         });
     };
-    
-    updateNumFilter = (event, filter) => {
-        this.setState({
-            [event.target.name]: event.target.value,
-            numericFilter: filter
-        }, () => {
-            console.log(this.state.numericFilter);
-        });
-    };
-
+        
     updateSortFilter = (event, sort) => {
         this.setState({
             [event.target.name]: event.target.value,
             sortFilter: sort
         }, () => {
-            console.log(this.state.sortFilter);
+            fetchData(this.state.query,
+                      this.state.tagFilter,
+                      this.state.sortFilter,
+                      this.state.numericFilter
+                     ).then(value =>
+                            this.setState({ data: value.hits }));
         });
+    };
 
-    }
+    updateNumFilter = (event, filter) => {
+        let filterMap = {
+            "last-24-hours": 1,
+            "past-week": 7,
+            "past-month": 30,
+            "past-year": 365
+        };
+
+        let timeStamp = Math.floor(Date.now() / 1000);
+        let updatedTimestamp = timeStamp - (filterMap[filter]
+                                            * 24 * 60 * 60);            
+        this.setState({
+            [event.target.name]: event.target.value,
+            numericFilter: "created_at_i>" + updatedTimestamp
+        }, () => {
+            fetchData(this.state.query,
+                      this.state.tagFilter,
+                      this.state.sortFilter,
+                      this.state.numericFilter
+                     ).then(value =>
+                            this.setState({ data: value.hits }));
+        });
+    };
 
     dropDownHandler = (element) => {
         this.dropDownElement = element;
