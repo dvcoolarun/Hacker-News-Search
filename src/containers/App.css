@@ -51,6 +51,18 @@
     position: absolute;
 }
 
+.custom-form {
+    position: absolute;
+    background: #fff;
+    margin-left: 100px;
+    margin-top: 150px;
+}
+
+.custom-form input {
+    padding: 10px;
+    margin: 10px;
+}
+
 .search-panel {
     display: flex;
     width: 50%;

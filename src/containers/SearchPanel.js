@@ -9,12 +9,17 @@ const SearchPanel = ({
     updateNumFilter,
     updateSortFilter,
     showCalender,
+    showCalenderHandler,
     menu1,
     menu2,
     menu3,
     searchDropDownValue,
     byDropDownValue,
     forDropDownValue,
+    customDateRange,
+    fromDate,
+    toDate,
+    onChange
 }) => {
     
     return(
@@ -146,23 +151,38 @@ const SearchPanel = ({
                             Past Year
                           </button>
                           
-                          {/*
-                             
-                             <button className="dropDownbtn" onClick={() => customDateRange("custom-range")}/>
-
-                             ** Calender JSX
-                          
-                          */}
-                          
-                          {/* 
-
-                             ** On Submiting Dates
-                             ** Get The Values Of Inputs
-                             ** Pass those values to updateTagFilter handler
-                             <button onClick={() => customDateRange(input1, input2)}>Custom Range</button>                           
-                           */}
-
+                          <button
+                            className="dropDownBtn"
+                            name="forDropDownValue"
+                            value="Custom Range"
+                            onClick={(event) => showCalenderHandler(event)}>
+                            Custom Range
+                          </button>
                         </div>          
+                    )
+                    : (
+                        null
+                    )
+            }
+            {
+                showCalender
+                    ?(
+                        <div className="custom-form">
+                          <input name="fromDate"
+                                 type="text"
+                                 value={fromDate}
+                                 onChange={onChange}
+                          />
+                          <input name="toDate"
+                                 type="text"
+                                 value={toDate}
+                                 onChange={onChange}
+                          />
+                          <button onClick={() =>
+                                           customDateRange()}>
+                            Submit
+                          </button>
+                        </div>
                     )
                     : (
                         null
