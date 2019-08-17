@@ -5,6 +5,7 @@
 
 .header {
     display: flex;
+    flex-direction: row;
     background: #ff742b;
     padding: 10px;
 }
@@ -65,8 +66,11 @@
 
 .search-panel {
     display: flex;
-    width: 50%;
     padding: 10px;
+}
+
+.search-panel-result {
+    margin-left: auto;
 }
 
 .search-panel span, .mainButton {
@@ -104,6 +108,40 @@
     padding-right: 5px;
 }
 
+.post-list-item span:last-child {
+    border: none;
+}
+
 .post-data-line {
     margin-bottom: 10px;
 }
+
+.pagination {
+    width: 40%;
+    margin: auto;
+    margin-top: 25px;
+    display: flex;
+    list-style: none
+}
+
+.pagination li{
+    cursor: pointer;
+    color: black;
+    margin: 0 3px;
+    padding: 5px 10px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+.page-link:active
+.page-link:link,
+.page-link:visited,
+.page-link:hover,
+.page-link:focus{
+    outline: none;
+}
+
+li.active {
+    border: 2px solid orange;
+}
+

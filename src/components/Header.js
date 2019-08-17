@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import InputSearch from 'InputSearch';
 
 /* STATELESS HEADER TO SHOWCASE HEADER ITEMS. */
@@ -14,15 +15,13 @@ const Header = ({ onChange, value }) => {
             </span>
           </div>
           <InputSearch onChange={onChange} value={value}/>
-          {/* <div className="powered-by"> */}
-          {/*   <img alt="" src="https://d3nb9u6x572n0.cloudfront.net/assets/algolia-logo-white-65086ed3930483340981cc7aaab1be051e38bc091406fd806d0ad05640c1bc28.svg"/> */}
-          {/* </div> */}
         </div>
     );
 };
 
 Header.propTypes = {
-
+    onChange: PropTypes.func.isRequired,
+    value: PropTypes.string.isRequired
 };
 
 export default Header;

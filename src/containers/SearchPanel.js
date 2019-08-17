@@ -19,7 +19,10 @@ const SearchPanel = ({
     customDateRange,
     fromDate,
     toDate,
-    onChange
+    onChange,
+    nbHits,
+    processingTimeMS,
+    page
 }) => {
     
     return(
@@ -189,12 +192,44 @@ const SearchPanel = ({
                     )
             }
           </div>
+          <div className="search-panel-result">
+            {
+                page !== 0
+                    ?
+                    <span>
+                      Page&nbsp;
+                      {page} of &nbsp;
+                      {nbHits}&nbsp;results
+                      ({processingTimeMS/1000}&nbsp;seconds)
+                    </span>
+                :
+                    <span>
+                      {nbHits}&nbsp;results
+                      ({processingTimeMS/1000}&nbsp;seconds)
+                    </span>
+            }
+          </div>
         </div>
     );
 };
 
 SearchPanel.propTypes = {
-    
+    showMenuHandler: PropTypes.func.isRequired,
+    dropMenuHandler: PropTypes.func,
+    updateTagFilter: PropTypes.func.isRequired,
+    updateSortFilter: PropTypes.func.isRequired,
+    showCalender: PropTypes.bool.isRequired,
+    menu1: PropTypes.bool.isRequired,
+    menu2: PropTypes.bool.isRequired,
+    menu3: PropTypes.bool.isRequired,
+    searchDropDownValue: PropTypes.string.isRequired,
+    byDropDownValue: PropTypes.string.isRequired,
+    forDropDownValue: PropTypes.string.isRequired,
+    customDateRange: PropTypes.func.isRequired,
+    fromDate: PropTypes.string.isRequired,
+    toDate: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    showCalenderHandler: PropTypes.func.isRequired
 };
 
 export default SearchPanel;

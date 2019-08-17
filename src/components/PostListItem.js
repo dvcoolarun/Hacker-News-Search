@@ -20,7 +20,7 @@ const titleCheck = (title, url, post) => {
               </div>
               <div className="post-data-line">
                 <span className="post-score">
-                  {post.points}
+                  {post.points}&nbsp;points
                 </span>
                 <span className="post-user">
                   {post.author}
@@ -40,13 +40,13 @@ const titleCheck = (title, url, post) => {
         return(
             <div className="post-list-item">
               <div className="post-title-panel">
-                <a className="post-title">
+                <a className="post-title" href={post.url}>
                   {post.story_title}
                 </a>
               </div>
               <div className="post-data-line">
                 <span className="post-score">
-                  {post.points}
+                  {post.points}&nbsppoints
                 </span>
                 <span className="post-user">
                   {post.author}

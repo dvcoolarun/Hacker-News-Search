@@ -3,6 +3,7 @@ import Header from 'Header';
 import moment from 'moment';
 import SearchPanel from 'SearchPanel';
 import PostList from 'PostList';
+import ReactPaginate from 'react-paginate';
 import fetchData from '../api';
 import 'App.css';
 
@@ -21,16 +22,28 @@ class App extends Component {
         sortFilter: "popularity",
         numericFilter: "created_at_i>1171843200",
         fromDate: "",
-        toDate: ""
+        toDate: "",
+        nbHits: "",
+        processingTimeMS: "",
+        page: 0,
+        nbPages: 0,
+        active: 0
     }
 
     componentDidMount() {
         fetchData(this.state.query,
                   this.state.tagFilter,
                   this.state.sortFilter,
-                  this.state.numericFilter
+                  this.state.numericFilter,
+                  this.state.page
                  ).then(value =>
-                        this.setState({ data: value.hits }));
+                        this.setState({
+                            data: value.hits,
+                            nbHits: value.nbHits,
+                            processingTimeMS: value.processingTimeMS,
+                            page: value.page,
+                            nbPages: value.nbPages
+                        }));
     }
 
     onChange = (event) => {
@@ -40,12 +53,40 @@ class App extends Component {
             fetchData(this.state.query,
                       this.state.tagFilter,
                       this.state.sortFilter,
-                      this.state.numericFilter
+                      this.state.numericFilter,
+                      this.state.page
                      ).then(value =>
-                            this.setState({ data: value.hits }));
+                            this.setState({
+                                data: value.hits,
+                                nbHits: value.nbHits,
+                                processingTimeMS: value.processingTimeMS,
+                                page: value.page,
+                                nbPages: value.nbPages
+                            }));
         });
     };
 
+    pageCountHandler = (object) => {
+        this.setState({
+            page: object["selected"],
+            active: object["selected"]
+        }, () => {
+            fetchData(this.state.query,
+                      this.state.tagFilter,
+                      this.state.sortFilter,
+                      this.state.numericFilter,
+                      this.state.page
+                     ).then(value =>
+                            this.setState({
+                                data: value.hits,
+                                nbHits: value.nbHits,
+                                processingTimeMS: value.processingTimeMS,
+                                page: value.page,
+                                nbPages: value.nbPages,
+                            }));
+        });
+    }
+    
     updateTagFilter = (event, tag) => {
         this.setState({
             [event.target.name]: event.target.value,
@@ -54,9 +95,16 @@ class App extends Component {
             fetchData(this.state.query,
                       this.state.tagFilter,
                       this.state.sortFilter,
-                      this.state.numericFilter
+                      this.state.numericFilter,
+                      this.state.page
                      ).then(value =>
-                            this.setState({ data: value.hits }));
+                            this.setState({
+                                data: value.hits,
+                                nbHits: value.nbHits,
+                                processingTimeMS: value.processingTimeMS,
+                                page: value.page,
+                                nbPages: value.nbPages
+                            }));
         });
     };
         
@@ -68,9 +116,16 @@ class App extends Component {
             fetchData(this.state.query,
                       this.state.tagFilter,
                       this.state.sortFilter,
-                      this.state.numericFilter
+                      this.state.numericFilter,
+                      this.state.page
                      ).then(value =>
-                            this.setState({ data: value.hits }));
+                            this.setState({
+                                data: value.hits,
+                                nbHits: value.nbHits,
+                                processingTimeMS: value.processingTimeMS,
+                                page: value.page,
+                                nbPages: value.nbPages
+                            }));
         });
     };
 
@@ -85,7 +140,7 @@ class App extends Component {
         let timeStamp = Math.floor(Date.now() / 1000);
         let updatedTimestamp = timeStamp - (filterMap[filter]
                                             * 24 * 60 * 60);
-        if (filter != "all-time") {
+        if (filter !== "all-time") {
             this.setState({
                 [event.target.name]: event.target.value,
                 numericFilter: "created_at_i>" + updatedTimestamp
@@ -93,9 +148,16 @@ class App extends Component {
                 fetchData(this.state.query,
                           this.state.tagFilter,
                           this.state.sortFilter,
-                          this.state.numericFilter
+                          this.state.numericFilter,
+                          this.state.page
                          ).then(value =>
-                                this.setState({ data: value.hits }));
+                                this.setState({
+                                    data: value.hits,
+                                    nbHits: value.nbHits,
+                                    processingTimeMS: value.processingTimeMS,
+                                    page: value.page,
+                                    nbPages: value.nbPages
+                                }));
             });
         }
         else {
@@ -106,9 +168,16 @@ class App extends Component {
                 fetchData(this.state.query,
                           this.state.tagFilter,
                           this.state.sortFilter,
-                          this.state.numericFilter
+                          this.state.numericFilter,
+                          this.state.page
                          ).then(value =>
-                                this.setState({ data: value.hits }));
+                                this.setState({
+                                    data: value.hits,
+                                    nbHits: value.nbHits,
+                                    processingTimeMS: value.processingTimeMS,
+                                    page: value.page,
+                                    nbPages: value.nbPages
+                                }));
             });
         }
     };
@@ -118,14 +187,20 @@ class App extends Component {
     };
     
     showMenuHandler = (menu) => {
-        this.setState({[menu]: true }, () => {
+        this.setState({
+            [menu]: true
+        }, () => {
             document.addEventListener('click', this.closeMenu);
         });
     };
 
     closeMenu = (event) => {
         if (!this.dropDownElement.contains(event.target)) {
-            this.setState({ menu1:false, menu2:false, menu3:false }, () => {
+            this.setState({
+                menu1:false,
+                menu2:false,
+                menu3:false
+            }, () => {
                 document.removeEventListener('click', this.closeMenu);
             });
         }
@@ -142,14 +217,15 @@ class App extends Component {
 
     closeCalender = (event) => {
         if (!this.dropDownElement.contains(event.target)) {
-            this.setState({ showCalender:false }, () => {
+            this.setState({
+                showCalender:false
+            }, () => {
                 document.removeEventListener('click', this.closeCalender);
             });
         }
     };
 
     customDateRange = () => {        
-
         const fromDateTimeStamp = Math.floor(
             moment(this.state.fromDate).format(
                     "X"));
@@ -168,9 +244,16 @@ class App extends Component {
             fetchData(this.state.query,
                       this.state.tagFilter,
                       this.state.sortFilter,
-                      this.state.numericFilter
+                      this.state.numericFilter,
+                      this.state.page
                      ).then(value =>
-                            this.setState({ data: value.hits }));
+                            this.setState({
+                                data: value.hits,
+                                nbHits: value.nbHits,
+                                processingTimeMS: value.processingTimeMS,
+                                page: value.page,
+                                nbPages: value.nbPages
+                            }));
         });
     };
 
@@ -181,8 +264,8 @@ class App extends Component {
               <SearchPanel showMenuHandler={this.showMenuHandler}
                            dropDownHandler={this.dropDownHandler}
                            updateTagFilter={this.updateTagFilter}
-                           updateNumFilter={this.updateNumFilter}
                            updateSortFilter={this.updateSortFilter}
+                           updateNumFilter={this.updateNumFilter}
                            showCalender={this.state.showCalender}
                            menu1={this.state.menu1}
                            menu2={this.state.menu2}
@@ -195,8 +278,24 @@ class App extends Component {
                            toDate={this.state.toDate}
                            onChange={this.onChange}
                            showCalenderHandler={this.showCalenderHandler}
+                           nbHits={this.state.nbHits}
+                           processingTimeMS={this.state.processingTimeMS}
+                           page={this.state.page}
               />
               <PostList posts_data={this.state.data}/>
+              <ReactPaginate
+                previousLabel={"<<"}
+                nextLabel={">>"}
+                breakLabel={'...'}
+                breakClassName={'break-me'}
+                pageCount={this.state.nbPages}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={this.pageCountHandler}
+                containerClassName={'pagination'}
+                pageLinkClassName={'page-link'}
+                activeClassName={'active'}
+              />
             </div>
         );
     }

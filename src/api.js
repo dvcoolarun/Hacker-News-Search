@@ -8,33 +8,37 @@ const handleErrors = (response) => {
     return response;
 };
 
-const fetchData = (query, tagFilter, sortFilter, numericFilter) => {
+const fetchData = (query, tagFilter, sortFilter, numericFilter, page) => {
     return (
-            sortFilter === "popularity"
-                ? (
-                    fetch(HN_BASE_URL +
-                          query +
-                          "&tags=" +
-                          tagFilter +
-                          "&numericFilters=" +
-                          numericFilter)
-                    
-                        .then(handleErrors)
-                        .then(response => response.json())
-                        .catch(error => console.log(error))
-                )
-                : (
-                    fetch(HN_SORT_BY_DATE +
-                          query +
-                          "&tags=" +
-                          tagFilter +
-                          "&numericFilters=" +
-                          numericFilter)
-                    
-                        .then(handleErrors)
-                        .then(response => response.json())
-                        .catch(error => console.log(error))
-                )
+        sortFilter === "popularity"
+            ? (
+                fetch(HN_BASE_URL +
+                      query +
+                      "&tags=" +
+                      tagFilter +
+                      "&numericFilters=" +
+                      numericFilter +
+                      "&page=" +
+                      page) 
+                
+                    .then(handleErrors)
+                    .then(response => response.json())
+                    .catch(error => console.log(error))
+            )
+            : (
+                fetch(HN_SORT_BY_DATE +
+                      query +
+                      "&tags=" +
+                      tagFilter +
+                      "&numericFilters=" +
+                      numericFilter +
+                      "&page=" +
+                      page)
+                
+                    .then(handleErrors)
+                    .then(response => response.json())
+                    .catch(error => console.log(error))
+            )
     );
 };
 
