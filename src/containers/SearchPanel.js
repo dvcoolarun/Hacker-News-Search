@@ -1,31 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { AppContext } from '../containers/App.js';
 
 /* MAKING API CALLS BASED ON THE SEARCH PANEL ITEM CLICK */
-const SearchPanel = ({
-    showMenuHandler,
-    dropDownHandler,
-    updateTagFilter,
-    updateNumFilter,
-    updateSortFilter,
-    showCalender,
-    showCalenderHandler,
-    menu1,
-    menu2,
-    menu3,
-    searchDropDownValue,
-    byDropDownValue,
-    forDropDownValue,
-    customDateRange,
-    fromDate,
-    toDate,
-    onChange,
-    nbHits,
-    processingTimeMS,
-    page
-}) => {
-    
-    return(
+const SearchPanel = () => (
+    <AppContext.Consumer>
+      {({
+          showMenuHandler,
+          dropDownHandler,
+          updateTagFilter,
+          updateSortFilter,
+          updateNumFilter,
+          showCalender,
+          menu1,
+          menu2,
+          menu3,
+          searchDropDownValue,
+          byDropDownValue,
+          forDropDownValue,
+          customDateRange,
+          fromDate,
+          toDate,
+          onChange,
+          showCalenderHandler,
+          nbHits,
+          processingTimeMS,
+          page
+      }) => (
         <div className="search-panel">
           <div>
             <span>Search</span>
@@ -209,9 +210,10 @@ const SearchPanel = ({
                     </span>
             }
           </div>
-        </div>
-    );
-};
+        </div>  
+      )}
+    </AppContext.Consumer>
+);
 
 SearchPanel.propTypes = {
     showMenuHandler: PropTypes.func.isRequired,

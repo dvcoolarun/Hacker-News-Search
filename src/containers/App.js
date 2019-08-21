@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Header from 'Header';
 import moment from 'moment';
-import SearchPanel from 'SearchPanel';
+import SearchPanel from  'SearchPanel';
 import PostList from 'PostList';
 import ReactPaginate from 'react-paginate';
 import fetchData from '../api';
 import 'App.css';
+
+const AppContext = React.createContext();
 
 class App extends Component {
     state = {
@@ -260,45 +262,54 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-              <Header onChange={this.onChange} value={this.state.query}/>
-              <SearchPanel showMenuHandler={this.showMenuHandler}
-                           dropDownHandler={this.dropDownHandler}
-                           updateTagFilter={this.updateTagFilter}
-                           updateSortFilter={this.updateSortFilter}
-                           updateNumFilter={this.updateNumFilter}
-                           showCalender={this.state.showCalender}
-                           menu1={this.state.menu1}
-                           menu2={this.state.menu2}
-                           menu3={this.state.menu3}
-                           searchDropDownValue={this.state.searchDropDownValue}
-                           byDropDownValue={this.state.byDropDownValue}
-                           forDropDownValue={this.state.forDropDownValue}
-                           customDateRange={this.customDateRange}
-                           fromDate={this.state.fromDate}
-                           toDate={this.state.toDate}
-                           onChange={this.onChange}
-                           showCalenderHandler={this.showCalenderHandler}
-                           nbHits={this.state.nbHits}
-                           processingTimeMS={this.state.processingTimeMS}
-                           page={this.state.page}
-              />
-              <PostList posts_data={this.state.data}/>
-              <ReactPaginate
-                previousLabel={"<<"}
-                nextLabel={">>"}
-                breakLabel={'...'}
-                breakClassName={'break-me'}
-                pageCount={this.state.nbPages}
-                marginPagesDisplayed={2}
-                pageRangeDisplayed={5}
-                onPageChange={this.pageCountHandler}
-                containerClassName={'pagination'}
-                pageLinkClassName={'page-link'}
-                activeClassName={'active'}
-              />
+              <AppContext.Provider
+                value = {{
+                    onChange: this.onChage,
+                    value: this.state.query,
+                    showMenuHandler: this.showMenuHandler,
+                    dropDownHandler:this.dropDownHandler,
+                    updateTagFilter:this.updateTagFilter,
+                    updateSortFilter:this.updateSortFilter,
+                    updateNumFilter:this.updateNumFilter,
+                    showCalender:this.state.showCalender,
+                    menu1:this.state.menu1,
+                    menu2:this.state.menu2,
+                    menu3:this.state.menu3,
+                    searchDropDownValue:this.state.searchDropDownValue,
+                    byDropDownValue:this.state.byDropDownValue,
+                    forDropDownValue:this.state.forDropDownValue,
+                    customDateRange:this.customDateRange,
+                    fromDate:this.state.fromDate,
+                    toDate:this.state.toDate,
+                    onChange:this.onChange,
+                    showCalenderHandler:this.showCalenderHandler,
+                    nbHits:this.state.nbHits,
+                    processingTimeMS:this.state.processingTimeMS,
+                    page:this.state.page,
+                    posts_data:this.state.data
+                }}
+              >
+                <Header />
+                <SearchPanel />
+                <PostList />
+                <ReactPaginate
+                  previousLabel={"<<"}
+                  nextLabel={">>"}
+                  breakLabel={'...'}
+                  breakClassName={'break-me'}
+                  pageCount={this.state.nbPages}
+                  marginPagesDisplayed={2}
+                  pageRangeDisplayed={5}
+                  onPageChange={this.pageCountHandler}
+                  containerClassName={'pagination'}
+                  pageLinkClassName={'page-link'}
+                  activeClassName={'active'}
+                />
+              </AppContext.Provider>
             </div>
         );
     }
 };
 
 export default App;
+export {AppContext};
