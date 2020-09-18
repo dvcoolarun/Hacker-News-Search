@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Header from 'Header';
+import Header from '../components/Header';
 import moment from 'moment';
-import SearchPanel from  'SearchPanel';
-import PostList from 'PostList';
+import SearchPanel from  '../containers/SearchPanel';
+import PostList from '../components/PostList';
 import ReactPaginate from 'react-paginate';
 import fetchData from '../api';
-import 'App.css';
+import '../containers/App.css';
 
 const AppContext = React.createContext();
 
@@ -264,7 +264,6 @@ class App extends Component {
             <div className="App">
               <AppContext.Provider
                 value = {{
-                    onChange: this.onChage,
                     value: this.state.query,
                     showMenuHandler: this.showMenuHandler,
                     dropDownHandler:this.dropDownHandler,

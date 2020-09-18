@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PostListItem from 'PostListItem';
+import PostListItem from '../components/PostListItem';
 import { AppContext } from '../containers/App.js';
 
 /* STATELESS POSTLIST PAGE USING LIST PROP */

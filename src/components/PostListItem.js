@@ -1,5 +1,5 @@
 import React from 'react';
-import Time from 'Time';
+import Time from '../components/Time';
 import PropTypes from 'prop-types';
 
 /* STATELESS POST-LIST-ITEM PAGE USING THE PROPS PASSED */

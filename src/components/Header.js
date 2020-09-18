@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import InputSearch from 'InputSearch';
+import InputSearch from '../containers/InputSearch';
 import { AppContext } from '../containers/App.js';
 
 /* STATELESS HEADER TO SHOWCASE HEADER ITEMS. */
