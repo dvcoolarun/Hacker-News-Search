@@ -1,5 +1,5 @@
-const HN_BASE_URL = 'http://hn.algolia.com/api/v1/search?query=';
-const HN_SORT_BY_DATE= 'http://hn.algolia.com/api/v1/search_by_date?query=';
+const HN_BASE_URL = 'https://hn.algolia.com/api/v1/search?query=';
+const HN_SORT_BY_DATE= 'https://hn.algolia.com/api/v1/search_by_date?query=';
 
 const handleErrors = (response) => {
     if (!response.ok) {
