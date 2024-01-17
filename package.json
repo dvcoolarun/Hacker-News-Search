@@ -1,37 +1,43 @@
 {
-  "homepage": "https://notoriousarun.github.io/hacker-news-search",
-  "name": "hacker-news-search",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "gh-pages": "^3.1.0",
-    "moment": "^2.24.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-paginate": "^6.3.0",
-    "react-scripts": "^3.4.3"
-  },
-  "scripts": {
-    "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "homepage": "https://notoriousarun.github.io/hacker-news-search",
+    "name": "hacker-news-search",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "axios": "^1.6.5",
+        "gh-pages": "^6.1.1",
+        "moment": "^2.30.1",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-is": "^18.2.0",
+        "react-paginate": "^8.2.0",
+        "react-scripts": "^5.0.1",
+        "react-select": "^5.8.0"
+    },
+    "scripts": {
+        "predeploy": "yarn run build",
+        "deploy": "gh-pages -d build",
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "yarn-upgrade-all": "^0.7.2"
+    }
 }

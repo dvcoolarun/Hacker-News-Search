@@ -1,25 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import PostListItem from '../components/PostListItem';
-import { AppContext } from '../containers/App.js';
+import React from "react";
+import PostListItem from "../components/PostListItem";
+import { useAppState } from "../app-context";
 
-/* STATELESS POSTLIST PAGE USING LIST PROP */
-const PostList = () => (
-    <AppContext.Consumer>
-      {({
-          posts_data
-      }) => (
-          <div className="post-list">
-            {posts_data.map((post, index)=> (
-                <PostListItem key={post.objectID} index={index} post={post}/>
-            ))}
-          </div>
-      )}
-    </AppContext.Consumer>
-);
+const PostList = () => {
+  const { state: { data } } = useAppState();
 
-PostList.propTypes = {
-    posts_data: PropTypes.array.isRequired
+  return (
+    <div className="post-list">
+      {data &&
+        data.map((post, index) => (
+          <PostListItem key={post.objectID} index={index} post={post} />
+        ))}
+    </div>
+  );
 };
 
 export default PostList;

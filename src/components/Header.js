@@ -1,33 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import InputSearch from '../containers/InputSearch';
-import { AppContext } from '../containers/App.js';
+import React from "react";
+import InputSearch from "../containers/InputSearch";
 
 /* STATELESS HEADER TO SHOWCASE HEADER ITEMS. */
 const Header = () => (
-    <AppContext.Consumer>
-      {({
-          onChange,
-          value
-      }) => (
-           <div className="header">
-             <div className="logo-wrapper">
-               <img alt="" src="https://hn.algolia.com/assets/logo-hn-search.png"/>
-               <span className="logo-name">
-                 Search
-                 <br/>
-                 Hacker News
-               </span>
-             </div>
-             <InputSearch onChange={onChange} value={value}/>
-           </div>
-      )}
-    </AppContext.Consumer>
+  <div className="header">
+    <div className="logo-wrapper">
+      <img
+        src="https://hn.algolia.com/public/899d76bbc312122ee66aaaff7f933d13.png"
+        alt="logo"
+      />
+      <span className="logo-name">
+        Search
+        <br />
+        Hacker News
+      </span>
+    </div>
+    <InputSearch />
+  </div>
 );
-
-Header.propTypes = {
-    onChange: PropTypes.func.isRequired,
-    value: PropTypes.string.isRequired
-};
 
 export default Header;
