@@ -1,9 +1,6 @@
 export const initialState = {
     query: "",
     data: [],
-    searchDropDownValue: "Stories",
-    byDropDownValue: "Popularity",
-    forDropDownValue: "All Time",
     tagFilter: "(story,comment,poll)",
     sortFilter: "popularity",
     numericFilter: "created_at_i>1171843200",

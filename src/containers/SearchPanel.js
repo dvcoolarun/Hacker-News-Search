@@ -1,6 +1,7 @@
 import React from "react";
 import Select from "react-select";
 
+import { getUpdatedNumericFilterValue } from "./numericFilterUtils"
 import { useAppState } from "../app-context";
 
 import {
@@ -9,35 +10,38 @@ import {
   numericFilterOption,
 } from "./tagFilterOption";
 
-/* MAKING API CALLS BASED ON THE SEARCH PANEL ITEM CLICK */
 const SearchPanel = () => {
-  const [tagFilter, setTagFilter] = React.useState("");
-  const [sortFilter, setSortFilter] = React.useState("");
-  const [numericFilter, setNumericFilter] = React.useState("");
+  const [tagFilter, setTagFilter] = React.useState(tagFilterOption[0]);
+  const [sortFilter, setSortFilter] = React.useState(sortFilterOption[0]);
+  const [numericFilter, setNumericFilter] = React.useState(numericFilterOption[0]);
 
   const { state, dispatch } = useAppState();
   const { nbHits, processingTimeMS, page } = state;
 
   React.useEffect(() => {
-    if (tagFilter) {
+    if (tagFilter !== undefined && tagFilter !== null) {
       dispatch({
         type: "UPDATE_TAG_FILTER",
         payload: {
-          tagFilter: tagFilter,
+          tagFilter: tagFilter.value,
         },
       });
-    } else if (sortFilter) {
+    }
+    if (sortFilter !== undefined && sortFilter !== null) {
       dispatch({
         type: "UPDATE_SORT_FILTER",
         payload: {
-          sortFilter: sortFilter,
+          sortFilter: sortFilter.value
         },
       });
-    } else if (numericFilter) {
+    }
+    if (numericFilter !== undefined && numericFilter !== null) {
+      const updatedNumericFilter = getUpdatedNumericFilterValue(numericFilter.value);
+
       dispatch({
         type: "UPDATE_NUM_FILTER",
         payload: {
-          numericFilter: numericFilter,
+          numericFilter: updatedNumericFilter
         },
       });
     }
@@ -47,43 +51,44 @@ const SearchPanel = () => {
     <div className="search">
       <div className="search-panel">
         <div className="search-panel-select">
-          <span>Search</span>
+          <span> Search </span>{" "}
           <Select
             options={tagFilterOption}
             onChange={setTagFilter}
             defaultValue={tagFilter}
-          />
-        </div>
+          />{" "}
+        </div>{" "}
         <div className="search-panel-select">
-          <span>by</span>
+          <span> by </span>{" "}
           <Select
             options={sortFilterOption}
             onChange={setSortFilter}
             defaultValue={sortFilter}
-          />
-        </div>
+          />{" "}
+        </div>{" "}
         <div className="search-panel-select">
-          <span>for</span>
+          <span>for </span>{" "}
           <Select
             options={numericFilterOption}
             onChange={setNumericFilter}
             defaultValue={numericFilter}
-          />
-        </div>
-      </div>
+          />{" "}
+        </div>{" "}
+      </div>{" "}
       <div className="search-panel-result">
+        {" "}
         {page !== 0 ? (
           <span>
-            Page{" "}
-            {page} of {" "}
-            {nbHits}{" "}results ({processingTimeMS / 1000}{" "}seconds)
+            Page {page}{" "}
+            of {nbHits} results({processingTimeMS / 1000} seconds){" "}
           </span>
         ) : (
           <span>
-            {nbHits}{" "}results ({processingTimeMS / 1000}{" "}seconds)
+            {" "}
+            {nbHits} results({processingTimeMS / 1000} seconds){" "}
           </span>
-        )}
-      </div>
+        )}{" "}
+      </div>{" "}
     </div>
   );
 };

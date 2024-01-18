@@ -3,7 +3,7 @@ import React from "react";
 import Header from "../components/Header";
 import SearchPanel from "./SearchPanel";
 import PostList from "../components/PostList";
-import PaginatedItems from './../components/PaginatedItems';
+import PaginatedItems from "./../components/PaginatedItems";
 
 import fetchData from "../api";
 import { useAppState } from "../app-context";
@@ -33,8 +33,8 @@ function App() {
 
     return () => {
       abortController.abort();
-    }
-  }, [query, page]);
+    };
+  }, [query, page, tagFilter, sortFilter, numericFilter]);
 
   return (
     <div className="App">

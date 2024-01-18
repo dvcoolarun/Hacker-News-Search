@@ -1,17 +1,17 @@
 export const tagFilterOption = [
-    { value: "All", label: "All" },
-    { value: "Stories", label: "Stories" },
-    { value: "Comments", label: "Comments" },
+    { value: "(story,comment,poll)", label: "All" },
+    { value: "story", label: "Stories" },
+    { value: "comment", label: "Comments" },
 ];
 export const sortFilterOption = [
-    { value: "Popularity", label: "Popularity" },
-    { value: "Date", label: "Date" },
+    { value: "popularity", label: "Popularity" },
+    { value: "date", label: "Date" },
 ];
 export const numericFilterOption = [
-    { value: "All-time", label: "All-time" },
-    { value: "Last 24h", label: "Last 24h" },
-    { value: "Past Week", label: "Past Week" },
-    { value: "Past Month", label: "Past Month" },
-    { value: "Past Year", label: "Past Year" },
-    { value: "Custom Range", label: "Custom Range" },
+    { value: "all-time", label: "All-time" },
+    { value: "last-24-hours", label: "Last 24h" },
+    { value: "past-week", label: "Past Week" },
+    { value: "past-month", label: "Past Month" },
+    { value: "past-year", label: "Past Year" },
+    /* { value: "Custom Range", label: "Custom Range" }, */
 ];
